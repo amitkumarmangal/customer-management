@@ -1,0 +1,10 @@
+server:
+  port: 0   # MULTIPLE TOMCAT INSTANCES
+spring:
+  application:
+    name: customer-management
+  cloud:
+    config:
+      name: db,h2-console,eureka-client,actuator,tracing,logger
+  config:
+    import: optional:configserver:http://localhost:8888

@@ -2,7 +2,8 @@ package com.business.aspect;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,11 +26,13 @@ public class LoggingAspect {
         String methodName = signature.getName();
         long start = System.currentTimeMillis();
         Logger logger=LoggerFactory.getLogger(className);
-        logger.info("Going inside {}.{}() with args={} and headers are {}", className, methodName, Arrays.toString(joinPoint.getArgs()),getHeaders());
+        logger.info("Going inside {}.{}()", className, methodName);
+        logger.debug(" with args={} and headers are {}", Arrays.toString(joinPoint.getArgs()),getHeaders());
         try {
             Object result = joinPoint.proceed();
             long timeTaken = System.currentTimeMillis() - start;
-            logger.info("Going outside from {}.{}() with response={} taking total time={}ms", className, methodName, result, timeTaken);
+            logger.info("Going outside from {}.{}() taking total time={}ms", className, methodName, timeTaken);
+            logger.debug(" with response={} ", result);
             return result;
         } catch (Exception ex) {
             logger.error("Error Occurred in {}.{}() with message={}", className, methodName, ex.getMessage(), ex);

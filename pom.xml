@@ -9,7 +9,7 @@
         <version>1.0-SNAPSHOT</version>
         <relativePath>../bom/pom.xml</relativePath>
     </parent>
-    <artifactId>CustomerManagement</artifactId>
+    <artifactId>customer-management</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
